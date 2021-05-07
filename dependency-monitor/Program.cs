@@ -12,18 +12,14 @@ namespace dependency_monitor
     {
         static void Main(string[] args)
         {
-            // ADD CODEOWNERS
-            
             if (!CheckArguments(args)) return;
+            
+            var zipFilePath = args[0];
+            var localPath = args[1];
+            var referenceName = args[2];
 
-            // args[0]
-            string zipFilePath = args[0];
-            // args[1]
-            string localPath = args[1];
-            string referenceName = args[2];
-
-            unzipRepository(zipFilePath, localPath);
-            List<string> projectFiles = returnAllFiles(localPath);
+            UnzipRepository(zipFilePath, localPath);
+            var projectFiles = ReturnAllFiles(localPath);
 
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Found {0} C# Project files in archive", projectFiles.Count.ToString());
@@ -65,8 +61,7 @@ namespace dependency_monitor
         /// <returns></returns>
         private static void GetDependencies(string targetReferenceName, string path)
         {
-            int counter = 0;
-            // Loop through CSPROJ file and look for Dependencies
+            var counter = 0;
             using (var file = new StreamReader(path))
             {
                 string line;
@@ -113,7 +108,7 @@ namespace dependency_monitor
         /// </summary>
         /// <param name="zipFilePath"></param>
         /// <param name="output"></param>
-        private static void unzipRepository(string zipFilePath, string output)
+        private static void UnzipRepository(string zipFilePath, string output)
         {
             ZipFile.ExtractToDirectory(zipFilePath, output);
         }
@@ -123,7 +118,7 @@ namespace dependency_monitor
         /// </summary>
         /// <param name="sDir"></param>
         /// <returns></returns>
-        private static List<String> returnAllFiles(string sDir)
+        private static List<String> ReturnAllFiles(string sDir)
         {
             List<String> files = new List<String>();
             try
@@ -137,7 +132,7 @@ namespace dependency_monitor
                 }
                 foreach (string d in Directory.GetDirectories(sDir))
                 {
-                    files.AddRange(returnAllFiles(d));
+                    files.AddRange(ReturnAllFiles(d));
                 }
             }
             catch (Exception exception)
