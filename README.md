@@ -17,10 +17,10 @@ dependency-monitor.dll Microsoft.AspNetCore.Mvc.NewtonsoftJson /Users/youruserna
 
 Output:
 
+```
 Dependency="Name" Version="2.6.0"
-
 Dependency="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1"
-
 Dependency="Newtonsoft.Json" Version="12.0.3" 
+```
 
 Note: target dependency will be highlighted in RED if found, otherwise Green
