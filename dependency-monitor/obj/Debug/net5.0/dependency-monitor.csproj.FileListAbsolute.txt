@@ -1,0 +1,15 @@
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.csprojAssemblyReference.cache
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.AssemblyInfoInputs.cache
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.AssemblyInfo.cs
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.csproj.CoreCompileInputs.cache
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/bin/Debug/net5.0/dependency-monitor.deps.json
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/bin/Debug/net5.0/dependency-monitor.runtimeconfig.json
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/bin/Debug/net5.0/dependency-monitor.runtimeconfig.dev.json
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/bin/Debug/net5.0/dependency-monitor.dll
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/bin/Debug/net5.0/ref/dependency-monitor.dll
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/bin/Debug/net5.0/dependency-monitor.pdb
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.dll
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/ref/dependency-monitor.dll
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.pdb
+/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/Debug/net5.0/dependency-monitor.genruntimeconfig.cache
