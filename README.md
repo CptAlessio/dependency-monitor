@@ -6,8 +6,9 @@ Usage:
 
 ```
 dependency-monitor.dll 
-      arg[0] = Dependency name
-      arg[1] = CSPROJ file path
+      arg[0] = GitHub repo .zip archieve
+      arg[1] = Local Path to unzip files
+      arg[2] = Reference Target
 ```
 e.g.
 
