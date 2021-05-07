@@ -14,6 +14,8 @@ e.g.
 dependency-monitor.dll Microsoft.AspNetCore.Mvc.NewtonsoftJson /Users/yourusername/Desktop/YourCSharpProjectFile.csproj
 ```
 
+Output:
+
 Dependency="Name" Version="2.6.0"
 
 Dependency="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1"
