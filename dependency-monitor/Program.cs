@@ -10,7 +10,7 @@ namespace dependency_monitor
     {
         static void Main(string[] args)
         {
-            if (!CheckInput(args)) return;
+            if (!CheckArguments(args)) return;
             
             GetDependencies(args[0], args[1]);
         }
@@ -20,7 +20,7 @@ namespace dependency_monitor
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        private static bool CheckInput(string[] args)
+        private static bool CheckArguments(string[] args)
         {
             if (args.Length == 0)
             {
