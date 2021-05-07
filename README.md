@@ -4,10 +4,11 @@ Given a CSPROJ file return all dependencies used by the project
 
 Usage:
 
+```
 dependency-monitor.dll 
-  arg[0] = Dependency name
-  arg[1] = CSPROJ file path
-  
+      arg[0] = Dependency name
+      arg[1] = CSPROJ file path
+```
 e.g.
 
 ```
