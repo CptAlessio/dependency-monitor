@@ -10,11 +10,6 @@ dependency-monitor.dll
       arg[1] = Local Path to unzip files
       arg[2] = Reference Target
 ```
-e.g.
-
-```
-dependency-monitor.dll Microsoft.AspNetCore.Mvc.NewtonsoftJson /Users/yourusername/Desktop/YourCSharpProjectFile.csproj
-```
 
 Output:
 
