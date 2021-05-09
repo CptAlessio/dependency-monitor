@@ -1,7 +1,7 @@
 # dependency-monitor
 dependency-monitor is an application designed to detect GitHub repositories using a specific dependency. Both public and private repositories are supported.
 
-Using GitHub APIs, dependency-monitor authenticates and downloads the repository to your hard drive. It then looks for projects utilising the dependency by reading the content of .csproj files.
+Using GitHub APIs, dependency-monitor authenticates and downloads the repository to your hard drive. It then looks for projects using the dependency by reading the content of .csproj files.
 
 Let's assume you want to know how many projects across your GitHub organization are using Newtonsoft.Json.
 You could either clone all the repositories in your organization, open them one by one and look under "Packages" and make a list.
