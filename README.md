@@ -72,9 +72,9 @@ Use batch scan to scan two or more repositories at the same time.
 
 ### Example
 ```
-myCSharpTestProject
-MySecondGitProject
-randomRepoName
+PublicRepository1
+PublicRepository2
+PublicRepository3
 ```
 
 - Start dependency-monitor using `-batchscan`:
