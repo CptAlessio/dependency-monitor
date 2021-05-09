@@ -10,7 +10,7 @@ Important : Token must have "repo" rights and nothing else.
 
 Programming languanges supported : C# 
 
-###How to use:
+### How to use:
 
 ```
 dependency-monitor.dll 
@@ -18,13 +18,13 @@ dependency-monitor.dll
       arg[1] = Repository Name
       arg[2] = Vulnerable Dependency
 ```
-###Example
+### Example
 
 ```
 dependency-monitor.dll "YourOrganization" "YourRepository" "Microsoft.NET.Test.Sdk" 
 ```
 
-###Output:
+### Output:
 
 ```
 -------------------------------------
