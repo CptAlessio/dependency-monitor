@@ -17,7 +17,7 @@ dependency-monitor.[dll|exe] -batchscan myOrg Newtonsoft.Json
 To run the application requires a valid GitHub personal access token. To generate one, click on your profile icon > settings > developers settings > personal access tokens > generate new token.
 Grant repo rights to the token. No other permission required.
 
-Now add your token to `Main` in `Program.cs`
+Update `Token` with your GitHub personal access token. You can find it in `Program.cs` > `Main` > `Token`
 
 ```csharp
 /// <summary>
@@ -34,7 +34,7 @@ with a valid local path. This where the application stores source-code files and
 private const string OutputZipAnalysisFolder = @"<YOUR-LOCAL-PATH-HERE>";
 ```
 
-### How to scan one repository:
+## Scan one repository
 To scan one single repository, start dependency-monitor with the following arguments:
 
 ```
@@ -66,8 +66,8 @@ Dependency="WireMock.Net" Version="1.4.8"
     
 [OK] Vulnerable dependency not found
 ```
-## Automation (Batch scan)
-Use batch scan to scan two or more repositories.
+## Scan two or more repositories
+Use batch scan to scan two or more repositories at the same time.
 - Add the repository name to `repositories.txt` file. 
 
 ### Example
