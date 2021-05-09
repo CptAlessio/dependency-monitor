@@ -1,7 +1,8 @@
 # dependency-monitor
-dependency-monitor is an application designed to detect GitHub repositories using a specific dependency. Both public and private repositories are supported.
+Detect any Github repository in an organization using a particular dependency. It supports both public and private repositories and can scan multiple repositories at the same time.
 
-Using GitHub APIs, dependency-monitor authenticates and downloads the repository to your hard drive. It then looks for projects using the dependency by reading the content of .csproj files.
+Authentication to GitHub is handled by the GitHub APIs using a personal access token. The repository is cloned locally in .zip format. Dependencies are discovered by reading the content of every .csproj file in the solution.
+Data is purged after each scan to save space.
 
 Let's assume you want to know how many projects across your GitHub organization are using Newtonsoft.Json.
 You could either clone all the repositories in your organization, open them one by one and look under "Packages" and make a list.
@@ -10,13 +11,12 @@ You could either clone all the repositories in your organization, open them one 
 
 or use  depedency-monitor and just type this instead:
 ```
-dependency-monitor.dll -batchscan myOrg Newtonsoft.Json
+dependency-monitor.[dll|exe] -batchscan myOrg Newtonsoft.Json
 ```
 ### Requirements
-To run the application requires a valid GitHub personal access token.
+To run the application requires a valid GitHub personal access token. To generate one, click on your profile icon > settings > developers settings > personal access tokens > generate new token.
 
-To generate one, click on your profile image > settings > developers settings > personal access tokens > generate new token.
-Grant `repo` rights to the token. No other permission required.
+Important: Grant `repo` rights to the token. No other permission required.
 
 ### How to scan one repository:
 If you want to scan just one single repository, start dependency-monitor as follows:
@@ -63,10 +63,10 @@ MySecondGitProject
 randomRepoName
 ```
 
-- Start dependency-monitor using `-batchscan` mode as follows:
+- Start dependency-monitor using `-batchscan`:
 
 ```
-dependency-monitor.dll 
+dependency-monitor.[dll|exe] 
       args[0] = -batchscan
       args[1] = Organization
       args[2] = Vulnerable Dependency
@@ -80,7 +80,7 @@ Note: there is a delay of two seconds between scans. if you want to remove this 
 System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
 ```
 ### Output
-```angular2html
+```
 ----------------------------------------------------
 Found 1 C# project(s) in repository CodingChallenges
 ----------------------------------------------------
