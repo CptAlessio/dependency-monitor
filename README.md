@@ -53,11 +53,11 @@ dependency-monitor.dll
       args[1] = Organization
       args[2] = Vulnerable Dependency
 ```
-###Example
+### Example
 ```
 dependency-monitor.dll -batchscan myOrg Newtonsoft.Json
 ```
-###Output
+### Output
 ```angular2html
 ----------------------------------------------------
 Found 1 C# project(s) in repository CodingChallenges
