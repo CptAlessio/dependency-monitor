@@ -17,7 +17,7 @@ dependency-monitor.[dll|exe] -batchscan myOrg Newtonsoft.Json
 To run the application requires a valid GitHub personal access token. To generate one, click on your profile icon > settings > developers settings > personal access tokens > generate new token.
 Grant repo rights to the token. No other permission required.
 
-Now update `Main` in `Program.cs` with your token
+Now add your token to `Main` in `Program.cs`
 
 ```csharp
 /// <summary>
@@ -25,7 +25,7 @@ Now update `Main` in `Program.cs` with your token
 /// </summary>
 private const string TOKEN = "<YOUR-TOKEN-HERE>";
 ```
-Update `OUTPUT_ZIP_ANALYSIS_FOLDER`
+Update `OutputZipAnalysisFolder`
 with a valid local path. This where the application stores source-code files and the zip archive. Deleted after each scan.
 ```csharp
 /// <summary>
