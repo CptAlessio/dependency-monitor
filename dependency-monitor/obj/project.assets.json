@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "/Users/alessio.marziali/.nuget/packages/": {}
+    "C:\\Users\\aless\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/dependency-monitor.csproj",
+      "projectUniqueName": "C:\\Users\\aless\\RiderProjects\\dependency-monitor\\dependency-monitor\\dependency-monitor.csproj",
       "projectName": "dependency-monitor",
-      "projectPath": "/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/dependency-monitor.csproj",
-      "packagesPath": "/Users/alessio.marziali/.nuget/packages/",
-      "outputPath": "/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/obj/",
+      "projectPath": "C:\\Users\\aless\\RiderProjects\\dependency-monitor\\dependency-monitor\\dependency-monitor.csproj",
+      "packagesPath": "C:\\Users\\aless\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aless\\RiderProjects\\dependency-monitor\\dependency-monitor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/alessio.marziali/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\aless\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -58,7 +58,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/alessio.marziali/.dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\aless\\.dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

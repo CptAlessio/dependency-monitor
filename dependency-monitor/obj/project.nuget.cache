@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qy3k44LyEkTx/EqBz5ILazb1YO0XO4ZR6Zt+FVFxSPMszm0oYX7h2SAzYYZXoj/EMmUFN1kQ/MrYGg8adyUeCA==",
+  "dgSpecHash": "KLuPBkgn3lGWORUgYtDxGeu/5bJjcZkO3Nzy8ADzklKn/4u2xo23+GuDbEw5SwH4GFBYGxCXdbUHnuinA/vaCA==",
   "success": true,
-  "projectFilePath": "/Users/alessio.marziali/RiderProjects/dependency-monitor/dependency-monitor/dependency-monitor.csproj",
+  "projectFilePath": "C:\\Users\\aless\\RiderProjects\\dependency-monitor\\dependency-monitor\\dependency-monitor.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
