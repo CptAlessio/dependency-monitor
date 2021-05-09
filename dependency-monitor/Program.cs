@@ -1,7 +1,4 @@
-﻿// Dependency monitor Command line tool
-// Alessio Marziali 2021
-
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.IO.Compression;
