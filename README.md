@@ -1,7 +1,6 @@
 # dependency-monitor
-Scan Github (private and public) repositories for any given dependency.
+Scan one or more Github (private and public) repositories for any given dependency.
 Built using GitHub APIs and .NET core.
-
 Only support C# projects.
 
 ### Requirements
@@ -10,6 +9,9 @@ To generate one click on your profile image > settings > developers settings > p
 Token must have "repo" rights and nothing else.
 
 ### How to use:
+
+dependency-monitor supports single and batch scan mode.
+To scan one single repository start dependency-monitor as follows:
 
 ```
 dependency-monitor.dll 
@@ -44,5 +46,20 @@ Found 2 C# Project files in archive
 [OK] Vulnerable dependency not found
 
 ```
+
+## How scan multiple projects
+Open the repositories.txt file and add repositories names separated by a new line.
+
+Start dependency-monitor using the -batcscan mode as follows:
+
+```
+dependency-monitor.dll 
+      args[0] = -batchscan
+      args[1] = Organization
+      args[2] = Vulnerable Dependency
+
+dependency-monitor.dll "-batchscan" "YourOrganization" "Newtonsoft.Json"
+```
+
 
 Vulnerable dependencies will be highlighted in red if found, otherwise green
