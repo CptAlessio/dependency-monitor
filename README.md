@@ -35,7 +35,7 @@ private const string OutputZipAnalysisFolder = @"<YOUR-LOCAL-PATH-HERE>";
 ```
 
 ### How to scan one repository:
-If you want to scan just one single repository, start dependency-monitor as follows:
+To scan one single repository, start dependency-monitor with the following arguments:
 
 ```
 dependency-monitor.[dll|exe] 
@@ -67,7 +67,7 @@ Dependency="WireMock.Net" Version="1.4.8"
 [OK] Vulnerable dependency not found
 ```
 ## Automation (Batch scan)
-Use batch scan if you need to scan two or more repositories.
+Use batch scan to scan two or more repositories.
 - Add the repository name to `repositories.txt` file. 
 
 ### Example
