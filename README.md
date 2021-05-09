@@ -1,15 +1,16 @@
 # dependency-monitor
-Scan one or more Github (private and public) repositories for any given dependency.
-Built using GitHub APIs and .NET core.
-Only support C# projects.
+dependency-monitor is an application designed to scan and identify GitHub repositories using a specific dependency. Both public and private repositories are supported.
+
+Using GitHub APIs, dependency-monitor authenticates and downloads the repository to your hard drive. It then looks for projects utilising the dependency by querying .csproj files. Dependency-monitor deletes all files when the analysis is complete.
 
 ### Requirements
-Requires GitHub personal access token. 
-To generate one click on your profile image > settings > developers settings > personal access tokens > generate new token.
-Token must have "repo" rights and nothing else.
+To run the application requires a valid GitHub personal access token.
+
+To generate one, click on your profile image > settings > developers settings > personal access tokens > generate new token.
+Grant "repo" rights to the token. No other permission required.
 
 ### How to scan one repository:
-To scan one single repository start dependency-monitor as follows:
+If you want to scan just one single repository, start dependency-monitor as follows:
 
 ```
 dependency-monitor.dll 
@@ -42,8 +43,9 @@ Found 2 C# Project files in archive
 
 ```
 
-## How scan multiple projects
-Add repos names to repositories.txt
+## Automation (Batch scan)
+Use batch scan if you need to scan two or more repos.
+Add the repository name to `repositories.txt` file. One line, one repository.
 
 Start dependency-monitor using `-batchscan` mode as follows:
 
@@ -56,6 +58,10 @@ dependency-monitor.dll
 ### Example
 ```
 dependency-monitor.dll -batchscan myOrg Newtonsoft.Json
+```
+Note: there is a delay of two seconds between scans. if you want to remove this feature, remove the following line
+```csharp
+System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
 ```
 ### Output
 ```angular2html

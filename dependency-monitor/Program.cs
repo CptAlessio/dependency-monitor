@@ -72,7 +72,7 @@ namespace dependency_monitor
                 
                 var downloadRepository = DownloadRepository(args[1], _repositoryName);
                 ProcessLocalZipArchive(downloadRepository, _repositoryName);
-                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 5));
+                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
             }
             
             Console.WriteLine("Multi-repository scan mode complete..");
