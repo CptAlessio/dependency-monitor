@@ -106,7 +106,7 @@ Dependencies in repository:
 [OK] No dependencies in project.
 Multi-repository scan mode complete..
 ```
-Note: there is a delay of two seconds between scans. if you want to remove this feature, remove the following line from `Program.cs` method `BatchScanRepositories`
+Note: there is a delay of two seconds between scans. To remove this feature, remove the following line from `Program.cs` method `BatchScanRepositories`
 ```csharp
 System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
 ```
