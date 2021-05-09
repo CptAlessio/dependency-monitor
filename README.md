@@ -60,6 +60,3 @@ dependency-monitor.dll
 
 dependency-monitor.dll "-batchscan" "YourOrganization" "Newtonsoft.Json"
 ```
-
-
-Vulnerable dependencies will be highlighted in red if found, otherwise green
