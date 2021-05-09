@@ -89,7 +89,7 @@ dependency-monitor.[dll|exe]
 ```
 ### Example
 ```
-dependency-monitor.dll -batchscan myOrg Newtonsoft.Json
+dependency-monitor.[dll|exe] -batchscan myOrg Newtonsoft.Json
 ```
 ### Output
 ```
