@@ -1,22 +1,21 @@
 # dependency-monitor
-dependency-monitor-cli is a .NET core application you can use to scan Github repositories for any given dependency.
+Scan Github (private and public) repositories for any given dependency.
+Built using GitHub APIs and .NET core.
 
-Support public and private repositories and leverages GitHub APIs to connect and download repositories.
+Only support C# projects.
 
-In order to work you must provide a valid GitHub personal access token. 
-You can generate one by clicking on your profile image > settings > developers settings > personal access tokens > generate new token.
-
-Important : Token must have "repo" rights and nothing else.
-
-Programming languages supported : C# 
+### Requirements
+Requires GitHub personal access token. 
+To generate one click on your profile image > settings > developers settings > personal access tokens > generate new token.
+Token must have "repo" rights and nothing else.
 
 ### How to use:
 
 ```
 dependency-monitor.dll 
-      arg[0] = GitHub Organization/User
-      arg[1] = Repository Name
-      arg[2] = Vulnerable Dependency
+      args[0] = GitHub Organization/User
+      args[1] = Repository Name
+      args[2] = Vulnerable Dependency
 ```
 ### Example
 
