@@ -26,7 +26,7 @@ Now add your token to `Main` in `Program.cs`
 private const string TOKEN = "<YOUR-TOKEN-HERE>";
 ```
 Update `OutputZipAnalysisFolder`
-with a valid local path. This where the application stores source-code files and the zip archive. Deleted after each scan.
+with a valid local path. This where the application stores source-code files and the cloned repository. Deleted after each scan.
 ```csharp
 /// <summary>
 /// Analysis folder used to download/unzip and search Dependencies
