@@ -8,9 +8,7 @@ Requires GitHub personal access token.
 To generate one click on your profile image > settings > developers settings > personal access tokens > generate new token.
 Token must have "repo" rights and nothing else.
 
-### How to use:
-
-dependency-monitor supports single and batch scan mode.
+### How to scan one repository:
 To scan one single repository start dependency-monitor as follows:
 
 ```
@@ -20,13 +18,10 @@ dependency-monitor.dll
       args[2] = Vulnerable Dependency
 ```
 ### Example
-
 ```
 dependency-monitor.dll "YourOrganization" "YourRepository" "Microsoft.NET.Test.Sdk" 
 ```
-
 ### Output:
-
 ```
 -------------------------------------
 Found 2 C# Project files in archive
@@ -48,15 +43,34 @@ Found 2 C# Project files in archive
 ```
 
 ## How scan multiple projects
-Open the repositories.txt file and add repositories names separated by a new line.
+Add repos names to repositories.txt
 
-Start dependency-monitor using the -batchscan mode as follows:
+Start dependency-monitor using `-batchscan` mode as follows:
 
 ```
 dependency-monitor.dll 
       args[0] = -batchscan
       args[1] = Organization
       args[2] = Vulnerable Dependency
-
+```
+###Example
+```
 dependency-monitor.dll "-batchscan" "YourOrganization" "Newtonsoft.Json"
+```
+###Output
+```angular2html
+----------------------------------------------------
+Found 1 C# project(s) in repository CodingChallenges
+----------------------------------------------------
+Dependencies in repository:
+- Dependency name = "Newtonsoft.Json" Version="13.0.1"
+[WARNING] Vulnerable dependency found 1 time(s)
+
+--------------------------------------------------------
+Found 1 C# project(s) in repository ValheimExpertBuilder
+--------------------------------------------------------
+Dependencies in repository:
+
+[OK] No dependencies in project.
+Multi-repository scan mode complete..
 ```
