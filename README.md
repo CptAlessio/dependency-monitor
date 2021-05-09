@@ -1,5 +1,5 @@
 # dependency-monitor
-dependency-monitor-cli is a .net core application that can be used to scan Github repositories for any given dependency.
+dependency-monitor-cli is a .NET core application you can use to scan Github repositories for any given dependency.
 
 Support public and private repositories and leverages GitHub APIs to connect and download repositories.
 
