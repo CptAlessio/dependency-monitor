@@ -91,16 +91,16 @@ dependency-monitor.[dll|exe] "-batchscan" "myOrg" "Newtonsoft.Json"
 ```
 ### Output
 ```
-----------------------------------------------------
-Found 1 C# project(s) in repository CodingChallenges
-----------------------------------------------------
+-----------------------------------------------------
+Found 1 C# project(s) in repository PublicRepository1
+-----------------------------------------------------
 Dependencies in repository:
 - Dependency name = "Newtonsoft.Json" Version="13.0.1"
 [WARNING] Vulnerable dependency found 1 time(s)
 
---------------------------------------------------------
-Found 1 C# project(s) in repository ValheimExpertBuilder
---------------------------------------------------------
+-----------------------------------------------------
+Found 1 C# project(s) in repository PublicRepository2
+-----------------------------------------------------
 Dependencies in repository:
 
 [OK] No dependencies in project.
