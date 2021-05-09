@@ -1,7 +1,7 @@
 # dependency-monitor
 Detect any Github repository in an organization using a particular dependency. It supports both public and private repositories and can scan multiple repositories at the same time.
 
-Authentication to GitHub is handled by the GitHub APIs using a personal access token. The repository is cloned locally in .zip format. Dependencies are discovered by reading the content of every .csproj file in the solution.
+Authentication is handled by the GitHub APIs using a personal access token. The repository is cloned locally in .zip format. Dependencies are discovered by reading the content of every .csproj file in the solution.
 Data is purged after each scan to save space.
 
 Let's assume you want to know how many projects across your GitHub organization are using Newtonsoft.Json.
