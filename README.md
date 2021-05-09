@@ -19,7 +19,7 @@ dependency-monitor.dll
 ```
 ### Example
 ```
-dependency-monitor.dll "YourOrganization" "YourRepository" "Microsoft.NET.Test.Sdk" 
+dependency-monitor.dll myOrg myRepo Microsoft.NET.Test.Sdk 
 ```
 ### Output:
 ```
@@ -55,7 +55,7 @@ dependency-monitor.dll
 ```
 ###Example
 ```
-dependency-monitor.dll "-batchscan" "YourOrganization" "Newtonsoft.Json"
+dependency-monitor.dll -batchscan myOrg Newtonsoft.Json
 ```
 ###Output
 ```angular2html
