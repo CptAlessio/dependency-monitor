@@ -14,51 +14,51 @@ namespace dependency_monitor
         /// <summary>
         /// GitHub API Personal access token
         /// </summary>
-        private static readonly string TOKEN = "<YOUR-TOKEN>";
+        private const string Token = "<YOUR-TOKEN-HERE>";
         /// <summary>
         /// Analysis folder used to download/unzip and search Dependencies
         /// </summary>
-        private static readonly string OUTPUT_ZIP_ANALYSIS_FOLDER = @"C:\Users\aless\Desktop\dependency-monitor-cli\";
+        private const string OutputZipAnalysisFolder = @"<YOUR-LOCAL-PATH-HERE>";
         /// <summary>
         /// Vulnerable dependency
         /// </summary>
-        private static string REFERENCE_TO_LOOK_FOR { get; set; }
+        private static string ReferenceToLookFor { get; set; }
+
         /// <summary>
         /// Remove analysis folder from disk when done
         /// </summary>
-        private static readonly bool DELETE_AFTER_ANALYSIS = true;
-        
+        private const bool DeleteAfterAnalysis = true;
+
         static void Main(string[] args)
         {
-            REFERENCE_TO_LOOK_FOR = args[2];
-            
+
             if (args[0].ToLower().Equals("-batchscan"))
             {
-                // Scan multiple projects. Repositories are stored inside "repositories.txt"
+                ReferenceToLookFor = args[2];
+                // Batch Scan mode 
                 BatchScanRepositories(args);
             }
+
             else
             {
-                CheckArguments(args);
-                
+                ReferenceToLookFor = args[2];
                 // Single Repository scan mode
+                CheckArguments(args);
                 // Download Repository using Github Apis
                 var output = DownloadRepository(args[0], args[1]);
                 // Perform Dependency analysis and output results
                 ProcessLocalZipArchive(output, args[1]);
                 Console.WriteLine("Done");
             }
-            
         }
 
         /// <summary>
         /// Scan multiple repositories in one go. Repositories are stored inside the "repositories.txt" file
         /// </summary>
         /// <param name="args"></param>
-        static void BatchScanRepositories(string[] args)
+        private static void BatchScanRepositories(IReadOnlyList<string> args)
         {
-            string output = File.ReadAllText("repositories.txt");
-            
+            var output = File.ReadAllText("repositories.txt");
             var repositoryNames = output.Split("\n");
             
             foreach (var repositoryName in repositoryNames)
@@ -74,8 +74,7 @@ namespace dependency_monitor
                 ProcessLocalZipArchive(downloadRepository, _repositoryName);
                 System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
             }
-            
-            Console.WriteLine("Multi-repository scan mode complete..");
+            Console.WriteLine("Batch scan mode complete");
         }
         
         /// <summary>
@@ -85,7 +84,7 @@ namespace dependency_monitor
         /// <returns></returns>
         private static bool CheckArguments(string[] args)
         {
-            if (!TOKEN.Equals("<YOUR-TOKEN>")) return true;
+            if (!Token.Equals("<YOUR-TOKEN>")) return true;
             Console.WriteLine("[ERROR] Github API token not set!");
             return false;
         }
@@ -99,14 +98,14 @@ namespace dependency_monitor
         private static string DownloadRepository(string organisation, string repositoryName)
         {
             var url = "https://github.com/"+ organisation+ "/" + repositoryName + "/archive/master.zip";
-            var path = OUTPUT_ZIP_ANALYSIS_FOLDER + repositoryName + ".zip";
-            var outputAnalysisFolder = new DirectoryInfo(OUTPUT_ZIP_ANALYSIS_FOLDER);
+            var path = OutputZipAnalysisFolder + repositoryName + ".zip";
+            var outputAnalysisFolder = new DirectoryInfo(OutputZipAnalysisFolder);
             
             if (!outputAnalysisFolder.Exists) { outputAnalysisFolder.Create(); }
 
             using (var client = new System.Net.Http.HttpClient())
             {
-                var credentials = TOKEN;
+                var credentials = Token;
                 credentials = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(credentials));
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", credentials);
                 var contents = client.GetByteArrayAsync(url).Result;
@@ -121,20 +120,20 @@ namespace dependency_monitor
         /// <param name="args"></param>
         private static void ProcessLocalZipArchive(string zipLocation, string repositoryName)
         {
-            UnzipRepository(zipLocation, OUTPUT_ZIP_ANALYSIS_FOLDER);
-            var projectFiles = ReturnAllFiles(OUTPUT_ZIP_ANALYSIS_FOLDER);
-
-            string headerMessage = "Found "+ projectFiles.Count +" C# project(s) in repository " + repositoryName;
-           
+            UnzipRepository(zipLocation, OutputZipAnalysisFolder);
+            var projectFiles = ReturnAllFiles(OutputZipAnalysisFolder);
+            
+            var headerMessage = "Found "+ projectFiles.Count +" C# project(s) in repository " + repositoryName;
             printHeaderMessage(headerMessage);
+            
             // For each C# project file found perform analysis
             foreach (var csProjectFile in projectFiles)
             {
-                GetDependencies(REFERENCE_TO_LOOK_FOR, csProjectFile);
+                GetDependencies(ReferenceToLookFor, csProjectFile);
             }
 
             // Remove analysis folder when done
-            if (DELETE_AFTER_ANALYSIS)
+            if (DeleteAfterAnalysis)
             {
                 DeleteAnalysisFolder();
             }
@@ -145,7 +144,7 @@ namespace dependency_monitor
         /// </summary>
         private static void DeleteAnalysisFolder()
         {
-            var di = new DirectoryInfo(OUTPUT_ZIP_ANALYSIS_FOLDER);
+            var di = new DirectoryInfo(OutputZipAnalysisFolder);
                 foreach (var file in di.GetFiles()) { file.Delete(); }
                 foreach (var dir in di.GetDirectories()) {  dir.Delete(true); }
             di.Delete();
@@ -193,12 +192,10 @@ namespace dependency_monitor
             }
             else
             {
-                if (vulnerable_counter > 0)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("[WARNING] Vulnerable dependency found {0} time(s)" , vulnerable_counter.ToString());
-                    Console.WriteLine();
-                }
+                if (vulnerable_counter <= 0) return;
+                Console.WriteLine();
+                Console.WriteLine("[WARNING] Vulnerable dependency found {0} time(s)" , vulnerable_counter.ToString());
+                Console.WriteLine();
             }
         }
 

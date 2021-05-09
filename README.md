@@ -20,18 +20,18 @@ Grant repo rights to the token. No other permission required.
 Now update `Main` in `Program.cs` with your token
 
 ```csharp
-        /// <summary>
-        /// GitHub API Personal access token
-        /// </summary>
-        private static readonly string TOKEN = "<YOUR-TOKEN-HERE>";
+/// <summary>
+/// GitHub API Personal access token
+/// </summary>
+private const string TOKEN = "<YOUR-TOKEN-HERE>";
 ```
 Update `OUTPUT_ZIP_ANALYSIS_FOLDER`
 with a valid local path. This where the application stores source-code files and the zip archive. Deleted after each scan.
 ```csharp
-        /// <summary>
-        /// Analysis folder used to download/unzip and search Dependencies
-        /// </summary>
-        private static readonly string OUTPUT_ZIP_ANALYSIS_FOLDER = @"<LOCAL PATH HERE>";
+/// <summary>
+/// Analysis folder used to download/unzip and search Dependencies
+/// </summary>
+private const string OutputZipAnalysisFolder = @"<YOUR-LOCAL-PATH-HERE>";
 ```
 
 ### How to scan one repository:
@@ -45,7 +45,7 @@ dependency-monitor.[dll|exe]
 ```
 ### Example
 ```
-dependency-monitor.[dll|exe] myOrg myRepo Microsoft.NET.Test.Sdk 
+dependency-monitor.[dll|exe] "myOrg" "myRepo" "Microsoft.NET.Test.Sdk" 
 ```
 ### Output:
 ```
@@ -53,21 +53,19 @@ dependency-monitor.[dll|exe] myOrg myRepo Microsoft.NET.Test.Sdk
 Found 2 C# Project files in archive
 -------------------------------------
 
-    Dependency="Microsoft.NET.Test.Sdk" Version="16.9.1" 
-    Dependency="xunit.runner.visualstudio" Version="2.4.3" 
-    Dependency="Google.Protobuf" Version="3.15.6" 
+Dependency="Microsoft.NET.Test.Sdk" Version="16.9.1" 
+Dependency="xunit.runner.visualstudio" Version="2.4.3" 
+Dependency="Google.Protobuf" Version="3.15.6" 
     
 [WARNING] Vulnerable dependency found 1 time(s)
 
-    Dependency="Figgle" Version="0.4.0" 
-    Dependency="FluentAssertions" Version="5.10.3" 
-    Dependency="Microsoft.AspNetCore.TestHost" Version="3.1.13" 
-    Dependency="WireMock.Net" Version="1.4.8" 
+Dependency="Figgle" Version="0.4.0" 
+Dependency="FluentAssertions" Version="5.10.3" 
+Dependency="Microsoft.AspNetCore.TestHost" Version="3.1.13" 
+Dependency="WireMock.Net" Version="1.4.8" 
     
 [OK] Vulnerable dependency not found
-
 ```
-
 ## Automation (Batch scan)
 Use batch scan if you need to scan two or more repositories.
 - Add the repository name to `repositories.txt` file. 
@@ -89,7 +87,7 @@ dependency-monitor.[dll|exe]
 ```
 ### Example
 ```
-dependency-monitor.[dll|exe] -batchscan myOrg Newtonsoft.Json
+dependency-monitor.[dll|exe] "-batchscan" "myOrg" "Newtonsoft.Json"
 ```
 ### Output
 ```
