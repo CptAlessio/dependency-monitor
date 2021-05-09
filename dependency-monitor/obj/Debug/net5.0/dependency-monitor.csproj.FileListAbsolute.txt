@@ -29,3 +29,4 @@ C:\Users\aless\RiderProjects\dependency-monitor\dependency-monitor\obj\Debug\net
 C:\Users\aless\RiderProjects\dependency-monitor\dependency-monitor\obj\Debug\net5.0\ref\dependency-monitor.dll
 C:\Users\aless\RiderProjects\dependency-monitor\dependency-monitor\obj\Debug\net5.0\dependency-monitor.pdb
 C:\Users\aless\RiderProjects\dependency-monitor\dependency-monitor\obj\Debug\net5.0\dependency-monitor.genruntimeconfig.cache
+C:\Users\aless\RiderProjects\dependency-monitor\dependency-monitor\bin\Debug\net5.0\repositories.txt

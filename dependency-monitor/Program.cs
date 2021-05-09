@@ -3,9 +3,9 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.IO.Compression;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace dependency_monitor
 {
@@ -30,13 +30,52 @@ namespace dependency_monitor
         
         static void Main(string[] args)
         {
-            if (!CheckArguments(args)) return;
-                REFERENCE_TO_LOOK_FOR = args[2];
+            REFERENCE_TO_LOOK_FOR = args[2];
+            
+            if (args[0].ToLower().Equals("-batchscan"))
+            {
+                // Scan multiple projects. Repositories are stored inside "repositories.txt"
+                BatchScanRepositories(args);
+            }
+            else
+            {
+                CheckArguments(args);
                 
+                // Single Repository scan mode
                 // Download Repository using Github Apis
                 var output = DownloadRepository(args[0], args[1]);
                 // Perform Dependency analysis and output results
                 ProcessLocalZipArchive(output, args[1]);
+                Console.WriteLine("Done");
+            }
+            
+        }
+
+        /// <summary>
+        /// Scan multiple repositories in one go. Repositories are stored inside the "repositories.txt" file
+        /// </summary>
+        /// <param name="args"></param>
+        static void BatchScanRepositories(string[] args)
+        {
+            string output = File.ReadAllText("repositories.txt");
+            
+            var repositoryNames = output.Split("\n");
+            
+            foreach (var repositoryName in repositoryNames)
+            {
+                var _repositoryName = repositoryName;
+                
+                if (repositoryName.EndsWith("\r"))
+                {
+                    _repositoryName = repositoryName.Replace("\r", "");
+                }
+                
+                var downloadRepository = DownloadRepository(args[1], _repositoryName);
+                ProcessLocalZipArchive(downloadRepository, _repositoryName);
+                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 5));
+            }
+            
+            Console.WriteLine("Multi-repository scan mode complete..");
         }
         
         /// <summary>
@@ -46,16 +85,9 @@ namespace dependency_monitor
         /// <returns></returns>
         private static bool CheckArguments(string[] args)
         {
-            if (args.Length != 3)
-            {
-                Console.WriteLine("ERROR: Missing arguments");
-                return false;
-            }
-
             if (!TOKEN.Equals("<YOUR-TOKEN>")) return true;
             Console.WriteLine("[ERROR] Github API token not set!");
             return false;
-
         }
 
         /// <summary>
@@ -67,7 +99,7 @@ namespace dependency_monitor
         private static string DownloadRepository(string organisation, string repositoryName)
         {
             var url = "https://github.com/"+ organisation+ "/" + repositoryName + "/archive/master.zip";
-            var path = OUTPUT_ZIP_ANALYSIS_FOLDER + @"\"+ repositoryName + ".zip"; 
+            var path = OUTPUT_ZIP_ANALYSIS_FOLDER + repositoryName + ".zip";
             var outputAnalysisFolder = new DirectoryInfo(OUTPUT_ZIP_ANALYSIS_FOLDER);
             
             if (!outputAnalysisFolder.Exists) { outputAnalysisFolder.Create(); }
@@ -80,7 +112,6 @@ namespace dependency_monitor
                 var contents = client.GetByteArrayAsync(url).Result;
                 File.WriteAllBytes(path, contents);
             }
-
             return path;
         }
 
@@ -115,17 +146,8 @@ namespace dependency_monitor
         private static void DeleteAnalysisFolder()
         {
             var di = new DirectoryInfo(OUTPUT_ZIP_ANALYSIS_FOLDER);
-
-            foreach (var file in di.GetFiles())
-            {
-                file.Delete();
-            }
-
-            foreach (var dir in di.GetDirectories())
-            {
-                dir.Delete(true);
-            }
-            
+                foreach (var file in di.GetFiles()) { file.Delete(); }
+                foreach (var dir in di.GetDirectories()) {  dir.Delete(true); }
             di.Delete();
         }
 
@@ -135,7 +157,8 @@ namespace dependency_monitor
         /// <returns></returns>
         private static void GetDependencies(string targetReferenceName, string path)
         {
-            var counter = 0;
+            var vulnerable_counter = 0;
+            var nonvulnerable_counter = 0;
             Console.WriteLine("Dependencies in repository: ");
             Console.WriteLine();
             using (var file = new StreamReader(path))
@@ -150,35 +173,32 @@ namespace dependency_monitor
                         
                         if (line.ToLower().Contains(targetReferenceName.ToLower()))
                         {
-                            // Highlight vulnerable dependency in Red
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            counter++;
+                            vulnerable_counter++;
                             Console.WriteLine("- " + line);
-                            
                         }
                         else
                         {
-                            // Normal Values are Green
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine("- " + line);
+                            nonvulnerable_counter++;
+                            Console.WriteLine("- " + line);    
                         }
                     }
                 }
             }
 
-            if (counter == 0)
+            if (nonvulnerable_counter == 0 && vulnerable_counter == 0)
             {
-                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
-                Console.WriteLine("[OK] Vulnerable dependency not found");
+                Console.WriteLine("[OK] No dependencies in project.");
                 Console.WriteLine();
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine();
-                Console.WriteLine("[WARNING] Vulnerable dependency found {0} time(s)" , counter.ToString());
-                Console.WriteLine();
+                if (vulnerable_counter > 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("[WARNING] Vulnerable dependency found {0} time(s)" , vulnerable_counter.ToString());
+                    Console.WriteLine();
+                }
             }
         }
 
