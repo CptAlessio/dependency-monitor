@@ -50,7 +50,7 @@ Found 2 C# Project files in archive
 ## How scan multiple projects
 Open the repositories.txt file and add repositories names separated by a new line.
 
-Start dependency-monitor using the -batcscan mode as follows:
+Start dependency-monitor using the -batchscan mode as follows:
 
 ```
 dependency-monitor.dll 
