@@ -8,7 +8,7 @@ You can generate one by clicking on your profile image > settings > developers s
 
 Important : Token must have "repo" rights and nothing else.
 
-Programming languanges supported : C# 
+Programming languages supported : C# 
 
 ### How to use:
 
