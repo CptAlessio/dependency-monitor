@@ -13,10 +13,26 @@ or use  depedency-monitor and just type this instead:
 ```
 dependency-monitor.[dll|exe] -batchscan myOrg Newtonsoft.Json
 ```
-### Requirements
+### Configuration and requirements
 To run the application requires a valid GitHub personal access token. To generate one, click on your profile icon > settings > developers settings > personal access tokens > generate new token.
+Grant repo rights to the token. No other permission required.
 
-Important: Grant `repo` rights to the token. No other permission required.
+Now update `Main` in `Program.cs` with your token
+
+```csharp
+        /// <summary>
+        /// GitHub API Personal access token
+        /// </summary>
+        private static readonly string TOKEN = "<YOUR-TOKEN-HERE>";
+```
+Update `OUTPUT_ZIP_ANALYSIS_FOLDER`
+with a valid local path. This where the application stores source-code files and the zip archive. Deleted after each scan.
+```csharp
+        /// <summary>
+        /// Analysis folder used to download/unzip and search Dependencies
+        /// </summary>
+        private static readonly string OUTPUT_ZIP_ANALYSIS_FOLDER = @"<LOCAL PATH HERE>";
+```
 
 ### How to scan one repository:
 If you want to scan just one single repository, start dependency-monitor as follows:
