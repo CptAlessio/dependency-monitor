@@ -1,5 +1,5 @@
 # dependency-monitor
-dependency-monitor is an application designed to scan and identify GitHub repositories using a specific dependency. Both public and private repositories are supported.
+dependency-monitor is an application designed to detect GitHub repositories using a specific dependency. Both public and private repositories are supported.
 
 Using GitHub APIs, dependency-monitor authenticates and downloads the repository to your hard drive. It then looks for projects utilising the dependency by querying .csproj files.
 
