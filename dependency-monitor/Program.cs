@@ -38,7 +38,6 @@ namespace dependency_monitor
                 // Batch Scan mode 
                 BatchScanRepositories(args);
             }
-
             else
             {
                 ReferenceToLookFor = args[2];
@@ -64,7 +63,6 @@ namespace dependency_monitor
             foreach (var repositoryName in repositoryNames)
             {
                 var _repositoryName = repositoryName;
-                
                 if (repositoryName.EndsWith("\r"))
                 {
                     _repositoryName = repositoryName.Replace("\r", "");
