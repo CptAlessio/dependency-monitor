@@ -17,34 +17,35 @@ namespace dependency_monitor
         /// </summary>
         private const string OutputZipAnalysisFolder = @"<YOUR-LOCAL-PATH-HERE>";
         /// <summary>
+        /// Play beep sound at the end if a repository with target dependency is found  
+        /// </summary>
+        private static bool BeepOnDiscovery = true;
+        /// <summary>
         /// Vulnerable dependency
         /// </summary>
-        private static string ReferenceToLookFor { get; set; }
-
+        private static string TargetDependency { get; set; }
         /// <summary>
-        /// Remove analysis folder from disk when done
+        /// Remove analysis folder from disk when done.
+        /// Only use it in Single repo scan mode
         /// </summary>
         private const bool DeleteAfterAnalysis = true;
 
         static void Main(string[] args)
         {
-
+            CheckArguments(args);
+            TargetDependency = args[2];
+            // Batch Scan mode
             if (args[0].ToLower().Equals("-batchscan"))
             {
-                ReferenceToLookFor = args[2];
-                // Batch Scan mode 
                 BatchScanRepositories(args);
             }
-            else
+            else // Single Repository scan mode
             {
-                ReferenceToLookFor = args[2];
-                // Single Repository scan mode
-                CheckArguments(args);
                 // Download Repository using Github Apis
                 var output = DownloadRepository(args[0], args[1]);
                 // Perform Dependency analysis and output results
                 ProcessLocalZipArchive(output, args[1]);
-                Console.WriteLine("Done");
+                Console.WriteLine("Single repository scan completed successfully");
             }
         }
 
@@ -69,7 +70,7 @@ namespace dependency_monitor
                 ProcessLocalZipArchive(downloadRepository, _repositoryName);
                 System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
             }
-            Console.WriteLine("Batch scan mode complete");
+            Console.WriteLine("Batch scan completed successfully");
         }
         
         /// <summary>
@@ -79,6 +80,12 @@ namespace dependency_monitor
         /// <returns></returns>
         private static bool CheckArguments(string[] args)
         {
+            if (args.Length < 0)
+            {
+                Console.WriteLine("Missing parameters.. aborting");
+                return false;
+            }
+            
             if (!Token.Equals("<YOUR-TOKEN>")) return true;
             Console.WriteLine("[ERROR] Github API token not set!");
             return false;
@@ -124,7 +131,7 @@ namespace dependency_monitor
             // For each C# project file found perform analysis
             foreach (var csProjectFile in projectFiles)
             {
-                GetDependencies(ReferenceToLookFor, csProjectFile);
+                GetDependencies(csProjectFile);
             }
 
             // Remove analysis folder when done
@@ -149,12 +156,13 @@ namespace dependency_monitor
         /// Return all dependencies found in the project file
         /// </summary>
         /// <returns></returns>
-        private static void GetDependencies(string targetReferenceName, string path)
+        private static void GetDependencies(string path)
         {
-            var vulnerable_counter = 0;
-            var nonvulnerable_counter = 0;
+            var vulnerableDependencyCounter = 0;
+            var safeDependencyCounter = 0;
+            
             Console.WriteLine("Dependencies in repository: ");
-            Console.WriteLine();
+            
             using (var file = new StreamReader(path))
             {
                 string line;
@@ -165,21 +173,30 @@ namespace dependency_monitor
                         line = line.Trim().Replace("<PackageReference Include=", "Dependency name = ");
                         line = line.Replace("/>", "");
                         
-                        if (line.ToLower().Contains(targetReferenceName.ToLower()))
+                        if (line.ToLower().Contains(TargetDependency.ToLower()))
                         {
-                            vulnerable_counter++;
+                            vulnerableDependencyCounter++;
                             Console.WriteLine("- " + line);
                         }
                         else
                         {
-                            nonvulnerable_counter++;
+                            safeDependencyCounter++;
                             Console.WriteLine("- " + line);    
                         }
                     }
                 }
             }
+            processScanOutput(safeDependencyCounter, vulnerableDependencyCounter);
+        }
 
-            if (nonvulnerable_counter == 0 && vulnerable_counter == 0)
+        /// <summary>
+        /// Print messages based on findings
+        /// </summary>
+        /// <param name="safeDependencyCounter"></param>
+        /// <param name="vulnerableDependencyCounter"></param>
+        private static void processScanOutput(int safeDependencyCounter, int vulnerableDependencyCounter)
+        {
+            if (safeDependencyCounter == 0 && vulnerableDependencyCounter == 0)
             {
                 Console.WriteLine();
                 Console.WriteLine("[OK] No dependencies in project.");
@@ -187,15 +204,19 @@ namespace dependency_monitor
             }
             else
             {
-                if (vulnerable_counter <= 0) return;
+                if (vulnerableDependencyCounter <= 0) return;
                 Console.WriteLine();
-                Console.WriteLine("[WARNING] Vulnerable dependency found {0} time(s)" , vulnerable_counter.ToString());
+                Console.WriteLine("[WARNING] Vulnerable dependency found {0} time(s)", vulnerableDependencyCounter.ToString());
                 Console.WriteLine();
+                if (BeepOnDiscovery)
+                {
+                    Console.Beep();
+                }
             }
         }
 
         /// <summary>
-        /// Unzip repository archieve using .NET built-in library
+        /// Unzip repository archive using .NET built-in library
         /// </summary>
         /// <param name="zipFilePath"></param>
         /// <param name="output"></param>
@@ -209,7 +230,7 @@ namespace dependency_monitor
         /// </summary>
         /// <param name="sDir"></param>
         /// <returns></returns>
-        private static List<String> ReturnAllFiles(string sDir)
+        private static List<string> ReturnAllFiles(string sDir)
         {
             var files = new List<string>();
             try
@@ -234,8 +255,6 @@ namespace dependency_monitor
         /// <param name="headerMessage"></param>
         private static void printHeaderMessage(string headerMessage)
         {
-            Console.WriteLine();
-            printHeaderLine(headerMessage);
             Console.WriteLine();
             Console.WriteLine(headerMessage);
             printHeaderLine(headerMessage);
